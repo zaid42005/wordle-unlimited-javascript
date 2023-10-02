@@ -29,12 +29,13 @@ function App() {
 
   const [board,setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({attempt:0,letter:0});
+  const correctWord = "RIGHT";
   return (
     <div className="App">
       <nav>
         <h1>Wordle</h1>
       </nav>
-      <AppContext.Provider value = {{board, setBoard, currAttempt, setCurrAttempt, onDelete, onEnter, onSelectLetter}}>
+      <AppContext.Provider value = {{board, setBoard, currAttempt, setCurrAttempt, onDelete, onEnter, onSelectLetter, correctWord}}>
         <div className='game'>
         <Board />
         <Keyboard />

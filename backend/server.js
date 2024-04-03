@@ -2,14 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const readline = require('readline');
 const cors = require('cors');
-const corsOptions = {
-   origin:'https://wordle-unlimited-javascript-frontend-iq4fg3fs5.vercel.app', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
-}
-
-app.use(cors(corsOptions)) // Use this after the variable declaration
-
 const app = express();
 
 // Use CORS middleware

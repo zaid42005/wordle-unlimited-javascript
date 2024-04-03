@@ -6,14 +6,7 @@ const cors = require('cors');
 const app = express();
 
 // Use CORS middleware
-app.use(cors(
-    {
-        origin:["https://wordle-unlimited-javascript-ibgm.vercel.app"],
-        methods:["GET","FETCH"],
-        credentials: true
-
-    }
-));
+app.use(cors());
 
 // Endpoint to get a random word
 app.get('/random-word', (req, res) => {

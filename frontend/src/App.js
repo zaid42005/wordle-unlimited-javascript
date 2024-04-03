@@ -40,18 +40,12 @@ function App() {
     fetchRandomWord();
 }, [])
 
-  const onEnter = () => {
+ const onEnter = () => {
     if (currAttempt.letter !== 5) return;
-    setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 }); 
 
     let currWord = "";
     for (let i = 0; i < 5; i++) {
       currWord += board[currAttempt.attempt][i];
-    }
-
-    if (currWord.toLowerCase() === correctWord.toLowerCase()) {
-      setGameOver({ gameOver: true, guessedWord: true });
-      return;
     }
 
     if (!wordSet.has(currWord.toLowerCase())) {
@@ -59,7 +53,12 @@ function App() {
       return;
     }
 
-    
+    setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
+
+    if (currWord.toLowerCase() === correctWord.toLowerCase()) {
+      setGameOver({ gameOver: true, guessedWord: true });
+      return;
+    }
 
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });

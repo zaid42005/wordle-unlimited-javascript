@@ -3,7 +3,7 @@ const fs = require('fs');
 const readline = require('readline');
 const cors = require('cors');
 const corsOptions = {
-   origin:'*', 
+   origin:'https://wordle-unlimited-javascript-frontend-iq4fg3fs5.vercel.app', 
    credentials:true,            //access-control-allow-credentials:true
    optionSuccessStatus:200,
 }

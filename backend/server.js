@@ -8,7 +8,7 @@ const app = express();
 // Use CORS middleware
 app.use(cors(
     {
-        origin:["https://wordle-unlimited-javascript-ibgm-doomfh0h9.vercel.app"],
+        origin:["https://wordle-unlimited-javascript-ibgm.vercel.app"],
         methods:["GET"],
         credentials: true
 

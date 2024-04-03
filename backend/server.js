@@ -53,7 +53,3 @@ app.get('/random-word', async (req, res) => {
     }
 });
 
-const PORT = 4001;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});

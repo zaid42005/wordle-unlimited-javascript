@@ -5,7 +5,7 @@ import { boardDefault} from "./Words";
 import React, { useState, createContext, useEffect } from "react";
 import GameOver from "./components/GameOver";
 import Letter from "./components/Letter";
-const API_BASE = "https://wordle-unlimited-javascript.vercel.app"; // Assuming your API endpoint is at http://localhost:4001
+const API_BASE = "http://localhost:4001"; // Assuming your API endpoint is at http://localhost:4001
 
 export const AppContext = createContext();
 

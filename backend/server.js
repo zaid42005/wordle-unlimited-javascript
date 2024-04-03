@@ -10,36 +10,47 @@ app.use(cors({
 }));
 
 // Endpoint to get a random word
-app.get('/random-word', (req, res) => {
-    const words = [];
+app.get('/random-word', async (req, res) => {
+    try {
+        const words = [];
 
-    // Read the txt file line by line
-    const rl = readline.createInterface({
-        input: fs.createReadStream('wordle-bank.txt'),
-        output: process.stdout,
-        terminal: false
-    });
+        // Read the txt file line by line
+        const rl = readline.createInterface({
+            input: fs.createReadStream('wordle-bank.txt'),
+            output: process.stdout,
+            terminal: false
+        });
 
-    rl.on('line', (line) => {
-        words.push(line.trim());
-    });
+        // Promisify readline interface
+        const rlPromise = new Promise((resolve, reject) => {
+            rl.on('line', (line) => {
+                words.push(line.trim());
+            });
+            rl.on('close', () => {
+                resolve();
+            });
+            rl.on('error', (error) => {
+                reject(error);
+            });
+        });
 
-    rl.on('close', () => {
+        await rlPromise;
+
         if (words.length === 0) {
             return res.status(500).json({ error: "No words found" });
         }
+
         // Select a random word from the list
         const randomWord = words[Math.floor(Math.random() * words.length)];
         console.log("Random word:", randomWord);
 
         // Send the random word as the response
         res.json({ word: randomWord });
-    });
 
-    rl.on('error', (error) => {
+    } catch (error) {
         console.error("Error reading file:", error);
         res.status(500).json({ error: "Internal Server Error" });
-    });
+    }
 });
 
 const PORT = 4001;

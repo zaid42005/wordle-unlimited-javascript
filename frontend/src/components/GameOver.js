@@ -16,7 +16,7 @@ function GameOver() {
       </h3>
       <h1>Correct Word: {correctWord}</h1>
       {gameOver.guessedWord && (
-        <h3>You guessed in {currAttempt.attempt + 1} attempts</h3>
+        <h3>You guessed in {currAttempt.attempt} attempts</h3>
       )}
     </div>
   );

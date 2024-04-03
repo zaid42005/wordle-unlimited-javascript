@@ -32,7 +32,7 @@ app.get('/random-word', (req, res) => {
         console.log("Random word:", randomWord);
 
         // Send the random word as the response
-        res.json({ word: randomWord });
+        res.json({ word: randomWord, words });
     });
 
     rl.on('error', (error) => {

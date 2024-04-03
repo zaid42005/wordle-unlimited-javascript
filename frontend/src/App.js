@@ -12,7 +12,7 @@ export const AppContext = createContext();
 function App() {
   const [board, setBoard] = useState(boardDefault);
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letter: 0 });
-  //const [wordSet, setWordSet] = useState(new Set());
+  const [wordSet, setWordSet] = useState(new Set());
   const [correctWord, setCorrectWord] = useState("");
   const [disabledLetters, setDisabledLetters] = useState([]);
   const [gameOver, setGameOver] = useState({
@@ -22,25 +22,27 @@ function App() {
 
   useEffect(() => {
     const fetchRandomWord = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/random-word`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch word");
+        try {
+            const response = await fetch(`${API_BASE}/random-word`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch word");
+            }
+            const data = await response.json();
+            console.log(data.word);
+            setCorrectWord(data.word);
+            setWordSet(new Set(data.words));
+        } catch (error) {
+            console.error("Error fetching word:", error);
+            // Handle error fetching word
         }
-        const data = await response.json();
-        console.log(data.word);
-        setCorrectWord(data.word);
-      } catch (error) {
-        console.error("Error fetching word:", error);
-        // Handle error fetching word
-      }
     };
 
     fetchRandomWord();
-  }, []);
+}, [])
 
   const onEnter = () => {
     if (currAttempt.letter !== 5) return;
+    setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 }); 
 
     let currWord = "";
     for (let i = 0; i < 5; i++) {
@@ -52,12 +54,12 @@ function App() {
       return;
     }
 
-    /*if (!wordSet.has(currWord.toLowerCase())) {
+    if (!wordSet.has(currWord.toLowerCase())) {
       alert("Word not found");
       return;
-    }*/
+    }
 
-    setCurrAttempt({ attempt: currAttempt.attempt + 1, letter: 0 });
+    
 
     if (currAttempt.attempt === 5) {
       setGameOver({ gameOver: true, guessedWord: false });

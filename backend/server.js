@@ -9,7 +9,7 @@ const app = express();
 app.use(cors(
     {
         origin:["https://wordle-unlimited-javascript-ibgm.vercel.app"],
-        methods:["GET"],
+        methods:["GET","FETCH"],
         credentials: true
 
     }

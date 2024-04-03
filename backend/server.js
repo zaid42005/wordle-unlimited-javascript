@@ -13,7 +13,13 @@ app.use(cors(corsOptions)) // Use this after the variable declaration
 const app = express();
 
 // Use CORS middleware
-app.use(cors(corsOptions))
+
+app.use(cors(
+    {
+        origin:["https://wordle-unlimited-javascript-ibgm.vercel.app"],
+    }
+    ));
+
 
 // Endpoint to get a random word
 app.get('/random-word', (req, res) => {
